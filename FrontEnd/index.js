@@ -16,7 +16,7 @@ works.map(work => {
     figure.appendChild(image);
     figure.appendChild(figCaption);
     gallery.appendChild(figure);
-
+ 
     console.log(image)
 });
 

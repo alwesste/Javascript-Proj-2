@@ -7,27 +7,45 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script type="module" src="index.js"></script>
+	<script type="module" src="index2.js" defer></script>
 
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-	<nav>
-		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li><a href="login.html">login</a></li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
+	<div class="editMode">
+		<div class="editModeIcone">
+			<i class="fa-regular fa-pen-to-square fa-xl"></i>
+			<span>Mode edition</span>	
+			<button type="button">Publier les changements</button>
+		</div>
+	</div>
+	<div class="header">			
+		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+		<nav>
+			<ul>
+				<li>projets</li>
+				<li>contact</li>
+				<li><a href="login.html">login</a></li>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</ul>
+		</nav>
+	</div>
 </header>
 <main>
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
+
+			<div class="edit__container position">
+				<i class="fa-regular fa-pen-to-square fa-lg edit__button"></i>
+				<span>Modifier</span>
+			</div>
+
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -37,14 +55,26 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+
+		<div>
+			<h2>Mes Projets</h2>
+			<div class="edit__container position2">
+				<i class="fa-regular fa-pen-to-square fa-lg edit__button"></i>
+				<span>Modifier</span>
+			</div>
+		</div>
+
+		
+
 		<div class="filter__container">
 			<button class="filter filter_all">Tous</button>
 			<button class="filter filter_objets">Objets</button>
 			<button class="filter filter_appartements">Appartements</button>
 			<button class="filter filter_hotels_restaurants">Hotels & restaurants</button>
 		</div>
+		
 	<div class="gallery"></div>
+
 	</section>
 	<section id="contact">
 		<h2>Contact</h2>
@@ -59,8 +89,28 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
-</main>
 
+	<aside>
+		<div id="myModal" class="modal">
+			<div class="modal-wrapper">
+				<div class="modal-header">
+					<h3>Galerie photo</h3>
+					<span class="modalClose">&times;</span>
+				</div>
+				<div class="modal_content">
+					<div class="galleryModal"></div>
+				</div>
+				<div class="modal-footer">
+					<input type="submit" value="Ajouter une photo">
+					<p>supprimer la gallerie</p>
+					
+				</div>
+			</div>
+			
+		</div>
+	</aside>
+
+</main>
 <footer>
 	<nav>
 		<ul>

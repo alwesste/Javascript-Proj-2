@@ -42,7 +42,7 @@
 			<img src="./assets/images/sophie-bluel.png" alt="">
 
 			<div class="edit__container position">
-				<i class="fa-regular fa-pen-to-square fa-lg edit__button"></i>
+				<i class="fa-regular edit fa-pen-to-square fa-lg edit__button"></i>
 				<span>Modifier</span>
 			</div>
 
@@ -59,7 +59,7 @@
 		<div>
 			<h2>Mes Projets</h2>
 			<div class="edit__container position2">
-				<i class="fa-regular fa-pen-to-square fa-lg edit__button"></i>
+				<i class="fa-regular edit fa-pen-to-square fa-lg edit__button"></i>
 				<span>Modifier</span>
 			</div>
 		</div>
@@ -92,21 +92,27 @@
 
 	<aside>
 		<div id="myModal" class="modal">
-			<div class="modal-wrapper">
-				<div class="modal-header">
-					<h3>Galerie photo</h3>
+			<div class="modal_wrapper">
+				<div class="modal_header">
+					<h3 class="header_title">Galerie photo</h3>
 					<span class="modalClose">&times;</span>
 				</div>
 				<div class="modal_content">
 					<div class="galleryModal"></div>
+					<div class="addContent">
+						<div class="addcontent_picture">
+							<i class="fa-regular fa-image content fa-4xl"></i>						
+						</div>
+						<div class="addContent_title"></div>
+						<div class="addContent_category"></div>
+					</div>
+					
 				</div>
 				<div class="modal-footer">
 					<input type="submit" value="Ajouter une photo">
 					<p>supprimer la gallerie</p>
-					
 				</div>
 			</div>
-			
 		</div>
 	</aside>
 

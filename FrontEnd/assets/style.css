@@ -288,7 +288,7 @@ footer nav ul {
 
 }
 
-.fa-regular{
+.fa-regular .edit {
 	color: white;
 	margin-right: 20px;
 }
@@ -349,7 +349,7 @@ footer nav ul {
 	animation: fadeIn 0.4s;
 }
 
-.modal-wrapper {
+.modal_wrapper {
 	padding:80px 100px;
 	position: fixed;
 	background-color: #ffffff;
@@ -363,8 +363,12 @@ footer nav ul {
 	animation: slideTop 0.4s;
 }
 
+.modal_content{
+	display: flex;
+	width: 100%;
+}
 
-.modal-header h3 {
+.modal_header h3 {
 	font-size: 40px;
 	font-family: "work Sans";
 	margin-bottom: 20px;
@@ -435,6 +439,29 @@ footer nav ul {
 .modal-footer p {
 	color: red;
 	font-size: 16px;
+}
+
+.addContent {
+	display: none;
+	flex-direction: column;
+	width: 100%;
+	text-align: center;
+}
+
+.addcontent_picture {
+	border: solid 1px #E8F1F7;
+	border-radius: 3px;
+	height: 170px;
+	background-color: #E8F1F7;
+	width: 100%;
+	
+
+}
+
+.addcontent_picture .content {
+	color: #B9C5CC;
+	font-size: 60px;
+	
 }
 
 @keyframes fadeIn {

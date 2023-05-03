@@ -8,8 +8,13 @@ const filter__container = document.querySelector(".filter__container");
 const modify_btn = document.querySelectorAll(".edit__container")
 const edit = document.querySelector(".editMode")
 const modal = document.querySelector(".modal")
+const modal_wrapper = document.querySelector(".modal_wrapper")
+const modal_header = document.querySelector(".modal_header")
+const header_title = document.querySelector(".header_title")
 const modalClose = document.querySelector(".modalClose")
 const modal_content = document.querySelector(".modal_content")
+const galleryModal = document.querySelector(".galleryModal")
+const addContent = document.querySelector(".addContent")
 
 async function genererWorks() {
     const works = await fetch("http://localhost:5678/api/works").then(works => works.json())
@@ -93,6 +98,7 @@ if (localStorage.getItem("valeur")) {
     console.log("je ne suis pas ici !")
 }
 
+// passage a la modale
 
 async function genererWorksMoldal() {
 
@@ -166,3 +172,13 @@ window.onclick = function(event) {
     }
 }
 
+const addPicture = document.querySelector(".modal-footer input")
+addPicture.addEventListener("click", function() {
+    console.log("ajout photo")
+    header_title.innerHTML = "Ajout photo"
+    galleryModal.style.display = "none"
+    addContent.style.display = "flex"
+})
+
+
+//fin de la modale

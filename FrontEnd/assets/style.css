@@ -354,7 +354,7 @@ footer nav ul {
 	position: fixed;
 	background-color: #ffffff;
 	width: 530px;
-	height: 750px;
+	height: 650px;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
@@ -375,14 +375,34 @@ footer nav ul {
 }
 
 .modalClose {
-	float: right;
 	font-size: 36px;
 	font-weight: bold;
 	cursor: pointer;
-	position: relative;
-	top: -125px;
-	left: 205px;
+	position: absolute;
+	top: 20px;
+	left: 675px;
+	color: #666;
 }
+
+.modalClose:hover {
+	color: #000;
+}
+
+.modalBack {
+	position: relative;
+	right: 200px;
+	bottom: 105px;
+	font-size: 24px;
+	font-weight: bold;
+	color: #666;
+	cursor: pointer;
+	display: none;
+}
+  
+.modalBack:hover {
+	color: #000;
+}
+  
 
 .modal_content .galleryModal {
 	display: flex;
@@ -420,7 +440,7 @@ footer nav ul {
 	top: 5px;
 }
 
-.modal-footer {
+.modal_footer {
 	display: flex;
 	flex-direction: column;
 	margin: auto;
@@ -429,14 +449,32 @@ footer nav ul {
 	text-align: center;
 }
 
-.modal-footer input {
+.modal_footer input {
 	margin-top: 40px;
 	padding: 15px;
 	width: 300px;
 	cursor: pointer;
+	border: none;
 }
 
-.modal-footer p {
+.modal_footer_add {
+	border-top: solid 1px black;
+}
+
+.modal_footer_add button {
+	margin-top: 40px;
+	padding: 15px;
+	width: 300px;
+	cursor: pointer;
+	border: none;
+	color: white;
+	border-radius: 50px;
+	height: 50px;
+	font-size: 20px;
+	background-color: #A7A7A7;
+}
+
+.modal_footer p {
 	color: red;
 	font-size: 16px;
 }
@@ -448,17 +486,60 @@ footer nav ul {
 	text-align: center;
 }
 
-.addcontent_picture {
+.addContent_picture {
 	border: solid 1px #E8F1F7;
 	border-radius: 3px;
 	height: 170px;
 	background-color: #E8F1F7;
 	width: 100%;
-	
-
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
-.addcontent_picture .content {
+/* .addContent_picture input {
+	display: none;
+} */
+
+.addContent_picture label {
+	border: none;
+	background-color: #CBD6DC;
+	border-radius: 50px;
+	height: 40px;
+	width: 50%;
+	color: #306685;
+	font-size: 16px;
+	font-weight: 600;
+	margin: 10px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.addContent_form {
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	height: 200px;
+	justify-content: space-around;
+	margin-top: 30px;
+	margin-bottom: 40px;
+}
+
+.addContent_form input, select {
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	border: none;
+	height: 50px;
+	outline: none;
+}
+
+.addContent_form label {
+	font-weight: 600;
+}
+
+.addContent_picture .content {
 	color: #B9C5CC;
 	font-size: 60px;
 	

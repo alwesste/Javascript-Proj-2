@@ -96,19 +96,53 @@
 				<div class="modal_header">
 					<h3 class="header_title">Galerie photo</h3>
 					<span class="modalClose">&times;</span>
+					<span class="modalBack"></a><i class="fas fa-arrow-left"></i></span>
 				</div>
 				<div class="modal_content">
 					<div class="galleryModal"></div>
-					<div class="addContent">
-						<div class="addcontent_picture">
-							<i class="fa-regular fa-image content fa-4xl"></i>						
+					
+				<!-- debut du form  -->
+
+					<form class="addContent">
+
+						<div class="addContent_picture">
+
+							<i class="fa-regular fa-image content fa-4xl"></i>		
+							<!-- <label for="imageUrl" class="custom-file-upload"> -->
+								+ Ajouter photo
+							
+							<input type="file" name="image" id="imageUrl">					
+							<!-- </label> -->
+							<p>jpg, png : 4mo max</p>	
+							<!-- <img src="" alt="">	 -->
+
 						</div>
-						<div class="addContent_title"></div>
-						<div class="addContent_category"></div>
-					</div>
+
+						<div class="addContent_form" enctype="multipart/form-data">
+
+							<label for="titlePicture">Titre</label>
+							<input type="text" name="title" id="titlePicture">
+
+							<label for="categoryPicture">Categorie</label>
+							<select name="category" id="categoryId">
+								<option value=""></option>
+								<option value="Objets">Objets</option>
+								<option value="Appartements">Appartements</option>
+								<option value="Hotels & restaurants">Hotels & restaurants</option>
+							</select>
+
+						</div>
+
+						<div class="modal_footer_add">
+							<button class="modal_footerBtn" type="submit">Valider</button>
+						</div>
+
+					</form>
+
+				<!-- fin du form -->
 					
 				</div>
-				<div class="modal-footer">
+				<div class="modal_footer">
 					<input type="submit" value="Ajouter une photo">
 					<p>supprimer la gallerie</p>
 				</div>

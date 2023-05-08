@@ -408,21 +408,23 @@ footer nav ul {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 20px;
-	margin: auto;
+	justify-content: center;
 }
 
-.modal_content img{
-	display: flex;
-	width: 90px;
-	position: relative;
-	cursor: pointer;
-
-}
+/* .modal_content img{
+	
+} */
 
 .modal_content figure {
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100px;
+	width: 100px;
+	margin-bottom: 45px;
+	cursor: pointer;
+	
 }
-
 
 .modal_content figure div i {
 	background-color: black;
@@ -496,11 +498,12 @@ footer nav ul {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	position: relative;
 }
 
-/* .addContent_picture input {
+.addContent_picture input {
 	display: none;
-} */
+}
 
 .addContent_picture label {
 	border: none;
@@ -544,6 +547,8 @@ footer nav ul {
 	font-size: 60px;
 	
 }
+
+
 
 @keyframes fadeIn {
 	from {

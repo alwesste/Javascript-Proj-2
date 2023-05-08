@@ -11,8 +11,9 @@
 	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
-	<script type="module" src="index2.js" defer></script>
+	<link rel="stylesheet" href="./assets/style.css">	
+	<script type="module" src="index.js" defer></script>
+	<script type="module" src="modale.js" defer></script>
 
 </head>
 <body>
@@ -103,22 +104,22 @@
 					
 				<!-- debut du form  -->
 
-					<form class="addContent">
+					<form class="addContent" id="addContent">
 
 						<div class="addContent_picture">
 
 							<i class="fa-regular fa-image content fa-4xl"></i>		
-							<!-- <label for="imageUrl" class="custom-file-upload"> -->
+							<label for="imageSend" class="imageSendLabel">
 								+ Ajouter photo
-							
-							<input type="file" name="image" id="imageUrl">					
-							<!-- </label> -->
+							</label>
+							<input type="file" name="image" id="imageSend">					
 							<p>jpg, png : 4mo max</p>	
-							<!-- <img src="" alt="">	 -->
+
+							<img class="imageShow" id="imageShow" src="" alt="">	
 
 						</div>
 
-						<div class="addContent_form" enctype="multipart/form-data">
+						<div class="addContent_form" onsubmit="return false">
 
 							<label for="titlePicture">Titre</label>
 							<input type="text" name="title" id="titlePicture">

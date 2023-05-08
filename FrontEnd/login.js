@@ -8,67 +8,108 @@ login_button.addEventListener("click", function () {
 
 
 function loginAccount () {
-    document.querySelector(".login-form").addEventListener("submit", async function(event) {
+    document.querySelector(".login-form").addEventListener("submit", function(event) {
         event.preventDefault();
-
+      
         const inputValue = {
-            email: event.target.querySelector("[name=email]").value,
-            password: event.target.querySelector("[name=password]").value,
+          email: event.target.querySelector("[name=email]").value,
+          password: event.target.querySelector("[name=password]").value,
         };
-            
-        
+      
         const chargeUtile = JSON.stringify(inputValue);
-
-        await fetch("http://localhost:5678/api/users/login", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: chargeUtile,
+      
+        fetch("http://localhost:5678/api/users/login", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: chargeUtile,
         })
-        
-        
-        .then(res => {
-            if (res.status === 200) {
-                res.json().then((data) => {
-                  window.localStorage.setItem("valeur", data.token)
-                  window.location.href = "index.html"
 
-                }).catch((error) => {
-                  console.log("erreur lors de l'extraction du JSON : ", error);
-                });
-            
-            } else if (res.status === 401) {
+        .then(response => {
+            if (response.status === 401) {
                 let messageError = document.querySelector(".messageError");
-                messageError.textContent = "Nous ne reconnaissons pas votre mot de passe !"
+                messageError.textContent = "Nous ne reconnaissons pas vos identifiants!"
                 messageError.style.marginBottom = "20px"
                 messageError.style.color = "red"
 
                 let inputPassword = document.querySelector("#password")
                 inputPassword.style.border = "1px solid red";
                 inputPassword.style.boxShadow = "0px 0px 10px red"
-
-            } else if (res.status === 404) {  
+                throw new Error("not authorized");      
+            }
+            else if (response.status === 404) {
                 let messageError = document.querySelector(".messageError");
-                messageError.textContent = "Nous ne reconnaissons pas votre email !"
+                messageError.textContent = "Nous ne reconnaissons pas vos identifiants !"
                 messageError.style.marginBottom = "20px"
                 messageError.style.color = "red"
 
-                let inputEmails = document.querySelectorAll(".login-form input")
-                inputEmails.forEach(input => {
-                    input.style.border = "1px solid red";
-                    input.style.boxShadow = "0px 0px 10px red"
-                });  
-            };        
+                let inputEmail = document.querySelector("#email")
+                inputEmail.style.border = "1px solid red";
+                inputEmail.style.boxShadow = "0px 0px 10px red"
+                throw new Error("User not found")
+                
+            } 
+            else if (!response.ok) {
+                throw new Error("Unexpected error occurred");
+            }
+            return response.json();
         })
-         
 
-        .catch((error) => {
-            alert("La connexion a échoué. Veuillez réessayer plus tard.");
-            console.log("erreur code", error);
-        });   
+        .then(data => {
+          console.log(data.token);
+          window.localStorage.setItem("valeur", data.token);
+          window.location.href = "index.html"
+          console.log("ok ca roule");
+        })
 
-    });
+        .catch(error => console.error(error, "la connexion a echoue !"));
+      
+        
+   });
 
 };
 
+
+
+        // .then(res => {
+        //     if (res.status === 200) {
+        //         res.json().then((data) => {
+        //           window.localStorage.setItem("valeur", data.token)
+        //           window.location.href = "index.html"
+
+        //         }).catch((error) => {
+        //           console.log("erreur lors de l'extraction du JSON : ", error);
+        //         });
+            
+        //     } else if (res.status === 401) {
+        //         let messageError = document.querySelector(".messageError");
+        //         messageError.textContent = "Nous ne reconnaissons pas votre mot de passe !"
+        //         messageError.style.marginBottom = "20px"
+        //         messageError.style.color = "red"
+
+        //         let inputPassword = document.querySelector("#password")
+        //         inputPassword.style.border = "1px solid red";
+        //         inputPassword.style.boxShadow = "0px 0px 10px red"
+
+        //     } else if (res.status === 404) {  
+        //         let messageError = document.querySelector(".messageError");
+        //         messageError.textContent = "Nous ne reconnaissons pas votre email !"
+        //         messageError.style.marginBottom = "20px"
+        //         messageError.style.color = "red"
+
+        //         let inputEmails = document.querySelectorAll(".login-form input")
+        //         inputEmails.forEach(input => {
+        //             input.style.border = "1px solid red";
+        //             input.style.boxShadow = "0px 0px 10px red"
+        //         });  
+        //     };        
+        // })
+         
+
+        // .catch((error) => {
+        //     alert("La connexion a échoué. Veuillez réessayer plus tard.");
+        //     console.log("erreur code", error);
+        // });   
+
+ 
 
 loginAccount()

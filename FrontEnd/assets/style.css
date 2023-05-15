@@ -80,7 +80,8 @@ h1{
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
-	color: #B1663C
+	color: #B1663C;
+	cursor: pointer;
 }
 
 h1 > span {
@@ -105,11 +106,16 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	cursor: pointer;
 }
 
 nav li a {
 	text-decoration: none;
 	color: black;
+}
+
+nav li a:hover {
+	color: #B1663C;
 }
 
 li:hover {
@@ -215,7 +221,12 @@ input[type="submit"]{
 	margin : 2em auto ;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
+	transition: transform 0.20s
+}
+
+input[type="submit"]:hover {
+	transform: scale(1.05);
 }
 
 footer nav ul {
@@ -265,6 +276,10 @@ footer nav ul {
 	border-radius: 60px;
 	border: none;
 	cursor: pointer;
+	transition: transform 0.2s;
+}
+.login-button:hover {
+	transform: scale(1.1);
 }
 
 .login-link {
@@ -291,6 +306,7 @@ footer nav ul {
 .fa-regular .edit {
 	color: white;
 	margin-right: 20px;
+	cursor: pointer;
 }
 
 .editModeIcone {
@@ -309,6 +325,11 @@ footer nav ul {
 	cursor: pointer;
 }
 
+.editModeIcone button:hover {
+	box-shadow: inset -4px -4px 10px rgba(0, 0, 0, 0.5);
+
+}
+
 .edit__button {
 	color: black;
 	margin-right: 5px;
@@ -317,7 +338,11 @@ footer nav ul {
 .edit__container {
 	cursor: pointer;
 	display: none;
+}
 
+.edit__container:hover {
+	color: #1D6154;
+	font-weight: 600;
 }
 
 .position {
@@ -350,11 +375,11 @@ footer nav ul {
 }
 
 .modal_wrapper {
-	padding:80px 100px;
+	padding: 30px 100px;
 	position: fixed;
 	background-color: #ffffff;
-	width: 530px;
-	height: 650px;
+	width: 500px;
+	height: 70vh;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
@@ -364,8 +389,11 @@ footer nav ul {
 }
 
 .modal_content{
-	display: flex;
 	width: 100%;
+	height: 60vh;
+	overflow: auto;
+	display: flex;
+	align-items: center;
 }
 
 .modal_header h3 {
@@ -380,7 +408,7 @@ footer nav ul {
 	cursor: pointer;
 	position: absolute;
 	top: 20px;
-	left: 675px;
+	left: 650px;
 	color: #666;
 }
 
@@ -391,7 +419,7 @@ footer nav ul {
 .modalBack {
 	position: relative;
 	right: 200px;
-	bottom: 105px;
+	bottom: 70px;
 	font-size: 24px;
 	font-weight: bold;
 	color: #666;
@@ -419,9 +447,8 @@ footer nav ul {
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	height: 100px;
+	height: 100%;
 	width: 100px;
-	margin-bottom: 45px;
 	cursor: pointer;
 	
 }
@@ -445,7 +472,6 @@ footer nav ul {
 .modal_footer {
 	display: flex;
 	flex-direction: column;
-	margin: auto;
 	border-top: solid 1px black;
 	width: 100%;
 	text-align: center;
@@ -491,9 +517,9 @@ footer nav ul {
 .addContent_picture {
 	border: solid 1px #E8F1F7;
 	border-radius: 3px;
-	height: 170px;
+	height: 200px;
 	background-color: #E8F1F7;
-	width: 100%;
+	width: 99%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -519,6 +545,11 @@ footer nav ul {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	transition: background-color 0.2s;
+}
+
+.addContent_picture label:hover {
+	background-color: #A7A7A7;
 }
 
 .addContent_form {
@@ -527,7 +558,7 @@ footer nav ul {
 	text-align: left;
 	height: 200px;
 	justify-content: space-around;
-	margin-top: 30px;
+	margin-top: 50px;
 	margin-bottom: 40px;
 }
 
@@ -548,7 +579,22 @@ footer nav ul {
 	
 }
 
+.error-message{
+	color: red;
+  }
+  
 
+.iconHover {
+	transform: scale(1.1);
+	transition: transform 0.1; /* Ajoute une transition animée */
+}
+
+.figureHover {
+	box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.2);
+	transform: scale(1.05);
+	border-radius: 5px;
+	transition: transform 0.3s, box-shadow 0.3s
+}
 
 @keyframes fadeIn {
 	from {

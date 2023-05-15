@@ -12,18 +12,25 @@ const modal = document.querySelector(".modal")
 
 const works = await fetch("http://localhost:5678/api/works")
 .then(works => works.json())
-.then(worksData => {
-    const uniqueWorks = Array.from(new Set(worksData))
-    genererWorks(uniqueWorks);
 
-})
-.catch(error => {
-    console.error(error)
-})
 
+const eliminateDuplicate = (array, propriete) => {
+
+    const uniqueValue = new Set();  
+
+    return array.filter((item) => {
+        const value = item[propriete];
+        if (!uniqueValue.has(value)) {
+            uniqueValue.add(value);
+            return true;
+        }
+        return false; 
+    })
+}
 
 async function genererWorks(works) {
 
+   
     works.map((item) => {
         const gallery = document.querySelector(".gallery");
 
@@ -90,9 +97,6 @@ if (localStorage.getItem("valeur")) {
             modal.style.display = "flex"
         })
     })
-
-
-} else {
-    console.log("je ne suis pas ici !")
 }
 
+genererWorks(eliminateDuplicate(works, "title"))

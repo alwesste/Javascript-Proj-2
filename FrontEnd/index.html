@@ -118,14 +118,16 @@
 							<img class="imageShow" id="imageShow" src="" alt="">	
 
 						</div>
+						<div class="error-message"></div>
+
 
 						<div class="addContent_form" onsubmit="return false">
 
 							<label for="titlePicture">Titre</label>
-							<input type="text" name="title" id="titlePicture">
+							<input type="text" name="title" id="titlePicture" required>
 
 							<label for="categoryPicture">Categorie</label>
-							<select name="category" id="categoryId">
+							<select name="category" id="categoryId" required>
 								<option value=""></option>
 								<option value="Objets">Objets</option>
 								<option value="Appartements">Appartements</option>

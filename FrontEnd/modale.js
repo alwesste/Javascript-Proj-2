@@ -16,10 +16,24 @@ const addContent_picture = document.querySelector(".addContent_picture")
 
 
 //creation de la modale
-const works = await fetch("http://localhost:5678/api/works").then(response => response.json())
+const works = await fetch("http://localhost:5678/api/works")
+.then(response => response.json())
 
+const eliminateDuplicate = (array, propriete) => {
 
-async function genererWorksMoldal() {
+    const uniqueValue = new Set();  
+
+    return array.filter((item) => {
+        const value = item[propriete];
+        if (!uniqueValue.has(value)) {
+            uniqueValue.add(value);
+            return true;
+        }
+        return false; 
+    })
+}
+
+async function genererWorksMoldal(works) {
     
     works.map((item) => {
         const galleryModal = document.querySelector(".galleryModal");
@@ -30,12 +44,21 @@ async function genererWorksMoldal() {
         figure.dataset.x = item.category.name
         figure.setAttribute("data-id", item.id)
 
+        figure.addEventListener("mouseover", function () {
+            this.classList.add("figureHover");
+        })
+
+        figure.addEventListener("mouseout", function () {
+            this.classList.remove("figureHover");
+        })
+
         const image = document.createElement("img");   
         image.src = item.imageUrl;
     
         const figCaption = document.createElement("figcaption");
         figCaption.innerText = "editer";
         figCaption.style.marginTop = "5px"
+        figCaption.setAttribute("data-name", item.title)
 
         const icone = document.createElement("div");
         icone.classList.add("iconDel")
@@ -46,31 +69,58 @@ async function genererWorksMoldal() {
         icone.style.cursor = "pointer";
         icone.style.zIndex = "10"
 
+        icone.addEventListener("mouseover", function() {
+            this.classList.add("iconHover");
+        });
+          
+        icone.addEventListener("mouseout", function() {
+            this.classList.remove("iconHover");
+        });
+
+
         figure.appendChild(icone)
         figure.appendChild(image);
         figure.appendChild(figCaption);
         galleryModal.appendChild(figure); 
 
-        icone.addEventListener("click", function(event) {
+        icone.addEventListener("click", async function(event) {
             event.preventDefault();
             const id = figure.getAttribute("data-id")
-
             // Suppression des images
-            fetch(`http://localhost:5678/api/works/${id}`, {
-                method: "DELETE",
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("valeur")}`
-                }
-            })
-            .then(res => {
+
+            
+            // fetch(`http://localhost:5678/api/works/${id}`, {
+            //     method: "DELETE",
+            //     headers: {
+            //         "Authorization": `Bearer ${localStorage.getItem("valeur")}`
+            //     }
+            // })
+            // .then(res => {
+            //     if (res.ok) {
+            //         figure.remove();
+            //     } else {
+            //         alert ("probleme de status")
+            //         console.error(error);
+            //     }
+            // })
+            // .catch(error => console.error(error));        
+            
+            try {
+                const res = await fetch(`http://localhost:5678/api/works/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem("valeur")}`
+                    }
+                })
                 if (res.ok) {
                     figure.remove();
                 } else {
-                    alert ("probleme de status")
-                    console.error(error);
+                    throw new Error("Une erreur s'est produite lors de la suppression")
                 }
-            })
-            .catch(error => console.error(error));             
+            }
+            catch(error) {
+                console.error(error)
+            }     
         })
     })  
 }
@@ -94,7 +144,6 @@ window.onclick = function(event) {
 //changement de forme de la modale
 const addPicture = document.querySelector(".modal_footer input")
 addPicture.addEventListener("click", function() {
-    console.log("ajout photo")
     header_title.innerHTML = "Ajout photo"
     galleryModal.style.display = "none"
     modalBack.style.display = "block"
@@ -102,6 +151,7 @@ addPicture.addEventListener("click", function() {
     addPicture.style.display = "none"
     modal_footerInput.style.display = "none"
     modal_footer.style.display = "none"
+    modal_content.style.overflow = "hidden"
 
 
 })
@@ -134,11 +184,29 @@ imageSend.addEventListener("change", function(e) {
         imageShow.style.position = "absolute" 
         imageShow.style.height = "100%"
         imageSend.style.objectFit = "cover"
-        imageSendLabel.style.display = "none"
-        console.log("on clic sur imageShow");
+        imageSendLabel.style.display = "none"   
     }
     reader.readAsDataURL(image);
 });
+
+function checkFields() {
+    const image = imageSend.files[0];
+    const title = document.querySelector("#titlePicture").value;
+    const category = document.querySelector("#categoryId").selectedIndex;
+
+    const modal_footerBtn = document.querySelector(".modal_footerBtn");
+
+    if (image && title && category !== 0) {
+        modal_footerBtn.style.backgroundColor = "#1D6154"; // Changer la couleur du bouton en vert
+    } else {
+        modal_footerBtn.style.backgroundColor = ""; // Réinitialiser la couleur du bouton
+    }
+}
+
+// Écouter les modifications des champs
+imageSend.addEventListener("change", checkFields);
+document.querySelector("#titlePicture").addEventListener("input", checkFields);
+document.querySelector("#categoryId").addEventListener("change", checkFields);
 
 
 // requete POST envoie des images
@@ -148,6 +216,19 @@ addContent.addEventListener("submit", (event) => {
     const image = imageSend.files[0];
     const title = document.querySelector("#titlePicture").value;
     const category = document.querySelector("#categoryId").selectedIndex;
+
+    const errorMessage = document.querySelector(".error-message");
+
+//message d'erreur
+    if (!image) {
+        errorMessage.textContent = "Veuillez mettre une image.";
+        addContent_picture.style.border = "red 1px solid";
+
+        return;
+    } else {
+        modal_footerBtn.style.backgroundColor = "#1D6154";
+    }
+//fin de message d'erreur
 
     const formData = new FormData();
     formData.append("image", image);
@@ -175,4 +256,5 @@ addContent.addEventListener("submit", (event) => {
     .catch(error => console.error(error, "la connexion a échoué !"));
 });
 
-genererWorksMoldal(works);
+
+genererWorksMoldal(eliminateDuplicate(works, "title"));

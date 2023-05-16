@@ -354,7 +354,7 @@ footer nav ul {
 	position: relative;
 	left: 680px;
 	bottom: 52px;
-
+	width: fit-content;
 }
 
 /* creation de la modal */

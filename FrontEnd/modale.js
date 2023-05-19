@@ -86,24 +86,7 @@ async function genererWorksMoldal(works) {
         icone.addEventListener("click", async function(event) {
             event.preventDefault();
             const id = figure.getAttribute("data-id")
-            // Suppression des images
-
-            
-            // fetch(`http://localhost:5678/api/works/${id}`, {
-            //     method: "DELETE",
-            //     headers: {
-            //         "Authorization": `Bearer ${localStorage.getItem("valeur")}`
-            //     }
-            // })
-            // .then(res => {
-            //     if (res.ok) {
-            //         figure.remove();
-            //     } else {
-            //         alert ("probleme de status")
-            //         console.error(error);
-            //     }
-            // })
-            // .catch(error => console.error(error));        
+            // Suppression des images    
             
             try {
                 const res = await fetch(`http://localhost:5678/api/works/${id}`, {
@@ -230,6 +213,7 @@ addContent.addEventListener("submit", (event) => {
     }
 //fin de message d'erreur
 
+//interface FormData
     const formData = new FormData();
     formData.append("image", image);
     formData.append("title", title);

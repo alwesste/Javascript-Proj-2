@@ -51,10 +51,8 @@ function loginAccount () {
           window.location.href = "index.html"
         })
 
-        .catch(error => console.error(error, "la connexion a echoue !"));
-      
-        
-   });
+        .catch(error => console.error(error, "la connexion a echoue !")); 
+  });
 
 };
  

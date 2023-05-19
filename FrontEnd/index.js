@@ -11,9 +11,9 @@ const modal = document.querySelector(".modal")
 
 
 const works = await fetch("http://localhost:5678/api/works")
-.then(works => works.json())
+.then(res => res.json())
 
-
+// annulation des doublons
 const eliminateDuplicate = (array, propriete) => {
 
     const uniqueValue = new Set();  
@@ -29,7 +29,6 @@ const eliminateDuplicate = (array, propriete) => {
 }
 
 async function genererWorks(works) {
-
    
     works.map((item) => {
         const gallery = document.querySelector(".gallery");
@@ -65,7 +64,6 @@ function handleFilter(x) {
 
         })
     }
-     console.log("ceci est le resulta de x: ", x)
 }
 
 

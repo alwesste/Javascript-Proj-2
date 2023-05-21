@@ -13,6 +13,7 @@ const modalClose = document.querySelector(".modalClose")
 const modal_content = document.querySelector(".modal_content")
 const galleryModal = document.querySelector(".galleryModal")
 const addContent_picture = document.querySelector(".addContent_picture")
+const imageSend = document.querySelector("#imageSend");
 
 
 //creation de la modale
@@ -154,7 +155,6 @@ modalBack.addEventListener("click", function() {
 
 //Apparition de la photo au clic sur "+ Ajouter photo"
 const addContent = document.querySelector("#addContent");
-const imageSend = document.querySelector("#imageSend");
 const imageSendLabel = document.querySelector(".imageSendLabel");
 const imageShow = document.querySelector('.imageShow');
 
@@ -202,6 +202,13 @@ addContent.addEventListener("submit", (event) => {
 
     const errorMessage = document.querySelector(".error-message");
 
+    let imageExtension = ['image/jpeg', 'image/png', "image/jpg"]
+        if (!imageExtension.includes(image.type)) {
+        errorMessage.textContent = "Veuillez sélectionner une image au format JPEG ou PNG.";
+        addContent_picture.style.border = "red 1px solid";
+        return
+        }
+   
 //message d'erreur
     if (!image) {
         errorMessage.textContent = "Veuillez mettre une image.";
@@ -240,5 +247,27 @@ addContent.addEventListener("submit", (event) => {
     .catch(error => console.error(error, "la connexion a échoué !"));
 });
 
+//creation du menu deroulant de la modale
+
+const categoriesModal = await fetch("http://localhost:5678/api/categories") 
+    .then(response => response.json())
+    .catch(error => {
+        console.error(error); // Log any errors during the fetch request
+    });
+
+function createCategories(categoriesModal) {
+
+    categoriesModal.map((category) => {
+        const selectCategory = document.querySelector("#categoryId");
+    
+        const selectOption = document.createElement("option");
+        selectOption.innerText = category.name;
+        
+
+        selectCategory.appendChild(selectOption);
+
+    });
+}
+createCategories(categoriesModal)
 
 genererWorksMoldal(eliminateDuplicate(works, "title"));

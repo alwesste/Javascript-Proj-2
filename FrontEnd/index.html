@@ -31,7 +31,7 @@
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-				<li><a href="login.html">login</a></li>
+				<li class="log"><a href="login.html">login</a></li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -68,10 +68,8 @@
 		
 
 		<div class="filter__container">
-			<button class="filter filter_all">Tous</button>
-			<button class="filter filter_objets">Objets</button>
-			<button class="filter filter_appartements">Appartements</button>
-			<button class="filter filter_hotels_restaurants">Hotels & restaurants</button>
+			<button class="filter" id="filter_all" data-cat="Tous">Tous</button>
+			
 		</div>
 		
 		<div class="gallery"></div>
@@ -112,7 +110,7 @@
 							<label for="imageSend" class="imageSendLabel">
 								+ Ajouter photo
 							</label>
-							<input type="file" name="image" id="imageSend">					
+							<input type="file" name="image" id="imageSend" accept="image/jpeg, image/png, image.jpg">					
 							<p>jpg, png : 4mo max</p>	
 
 							<img class="imageShow" id="imageShow" src="" alt="">	
@@ -126,12 +124,9 @@
 							<label for="titlePicture">Titre</label>
 							<input type="text" name="title" id="titlePicture" required>
 
-							<label for="categoryPicture">Categorie</label>
+							<label for="categoryId">Categorie</label>
 							<select name="category" id="categoryId" required>
 								<option value=""></option>
-								<option value="Objets">Objets</option>
-								<option value="Appartements">Appartements</option>
-								<option value="Hotels & restaurants">Hotels & restaurants</option>
 							</select>
 
 						</div>

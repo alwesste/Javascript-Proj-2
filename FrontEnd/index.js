@@ -1,13 +1,11 @@
-const filter_all = document.querySelector(".filter_all")
-const filter_objets = document.querySelector(".filter_objets");
-const filter_appartements = document.querySelector(".filter_appartements");
-const filter_hotels_restaurants = document.querySelector(".filter_hotels_restaurants")
+const filter_all = document.querySelector("#filter_all")
 const filter__container = document.querySelector(".filter__container");
 
 const modify_btn = document.querySelectorAll(".edit__container")
 const edit = document.querySelector(".editMode")
 const modal = document.querySelector(".modal")
 
+const log = document.querySelector(".log")
 
 
 const works = await fetch("http://localhost:5678/api/works")
@@ -28,7 +26,7 @@ const eliminateDuplicate = (array, propriete) => {
     })
 }
 
-async function genererWorks(works) {
+function genererWorks(works) {
    
     works.map((item) => {
         const gallery = document.querySelector(".gallery");
@@ -49,6 +47,13 @@ async function genererWorks(works) {
     })
 }
 
+
+filter_all.addEventListener("click", function() {
+    handleFilter("Tous")
+});
+
+
+
 function handleFilter(x) {
     const figures = document.querySelectorAll(".article")
     figures.forEach(item => {
@@ -61,30 +66,48 @@ function handleFilter(x) {
     if (x === "Tous") {
         figures.forEach(item => {
             item.style.display = "block"
-
         })
     }
 }
 
+//gestion filter
+const categories = await fetch ("http://localhost:5678/api/categories")
+.then(response => response.json())
 
-filter_all.addEventListener("click", function() {
-    handleFilter("Tous")
-});
+function createFilter(categories) {
 
-filter_objets.addEventListener("click", function() {
-    handleFilter("Objets")
-});
+    categories.map((category) => {
+        console.log("1", categories)
+        const filter__container = document.querySelector(".filter__container");
 
-filter_appartements.addEventListener("click", function() {
-    handleFilter("Appartements")
-});
+        const button = document.createElement("button");
+        button.classList.add("filter");
+        button.dataset.cat = category.name;
+        button.innerText = category.name;
 
-filter_hotels_restaurants.addEventListener("click", function() {
-    handleFilter("Hotels & restaurants")
-});
+        filter__container.appendChild(button)
+
+        const filterButtons = document.querySelectorAll(".filter")
+        filterButtons.forEach((button) => {
+            button.addEventListener("click", function () {
+                const category = this.dataset.cat
+                console.log(button)
+                handleFilter(category)
+            })
+        })
+    })
+}
+
 
 if (localStorage.getItem("valeur")) {
-    
+
+//logout 
+    log.innerHTML = "logout";
+    log.onclick =  function() {
+        localStorage.removeItem("valeur");
+        location.reload();
+    }    
+
     filter__container.style.visibility = "hidden";
     edit.style.display = "block"
 
@@ -97,4 +120,5 @@ if (localStorage.getItem("valeur")) {
     })
 }
 
+createFilter(categories)
 genererWorks(eliminateDuplicate(works, "title"))

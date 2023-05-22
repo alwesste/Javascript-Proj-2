@@ -77,7 +77,6 @@ const categories = await fetch ("http://localhost:5678/api/categories")
 function createFilter(categories) {
 
     categories.map((category) => {
-        console.log("1", categories)
         const filter__container = document.querySelector(".filter__container");
 
         const button = document.createElement("button");
@@ -91,7 +90,6 @@ function createFilter(categories) {
         filterButtons.forEach((button) => {
             button.addEventListener("click", function () {
                 const category = this.dataset.cat
-                console.log(button)
                 handleFilter(category)
             })
         })

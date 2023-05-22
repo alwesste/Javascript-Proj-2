@@ -48,9 +48,6 @@ function genererWorks(works) {
 }
 
 
-filter_all.addEventListener("click", function() {
-    handleFilter("Tous")
-});
 
 
 
@@ -71,30 +68,40 @@ function handleFilter(x) {
 }
 
 //gestion filter
+
+
 const categories = await fetch ("http://localhost:5678/api/categories")
 .then(response => response.json())
 
-function createFilter(categories) {
+function createFilter (categories) {
+    categories.map((category, index) => {
+        if (index === 0) {
+            createBtnFilter("Tous")
+        }
 
-    categories.map((category) => {
-        const filter__container = document.querySelector(".filter__container");
-
-        const button = document.createElement("button");
-        button.classList.add("filter");
-        button.dataset.cat = category.name;
-        button.innerText = category.name;
-
-        filter__container.appendChild(button)
-
-        const filterButtons = document.querySelectorAll(".filter")
-        filterButtons.forEach((button) => {
-            button.addEventListener("click", function () {
-                const category = this.dataset.cat
-                handleFilter(category)
-            })
-        })
+        createBtnFilter(category.name)
     })
 }
+
+function createBtnFilter(category) {
+
+    const filter__container = document.querySelector(".filter__container");
+    const button = document.createElement("button");
+    button.classList.add("filter");
+    button.dataset.cat = category;
+    button.innerText = category;
+
+    filter__container.appendChild(button)
+
+    const filterButtons = document.querySelectorAll(".filter")
+    filterButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+            const category = this.dataset.cat
+            handleFilter(category)
+        })
+    }) 
+}
+
 
 
 if (localStorage.getItem("valeur")) {
